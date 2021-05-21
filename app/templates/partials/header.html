@@ -1,0 +1,19 @@
+<header>
+    <div>
+        {% if user.is_authenticated %}
+            <a href="{% url 'users:detail' user_obj.pk %}">
+                <span class="material-icons-outlined">account_circle</span>
+            </a>
+            <a href="{% url 'users:logout' %}">
+                <span class="material-icons-outlined">logout</span>
+            </a>
+        {% else%}
+            <a href="{% url 'users:signup' %}">
+                <span class="material-icons-outlined">person_add</span>
+            </a>
+            <a href="{% url 'users:login' %}">
+                <span class="material-icons-outlined">login</span>
+            </a>
+        {% endif %}            
+    </div>
+</header>
