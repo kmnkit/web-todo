@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class='w-full h-full flex justify-center'>
+        <div>
+            <h2>{{target_team.name}}</h2>
+            <p>{{target_team.description}}</p>
+            <!-- TODO: 멤버가 아닐 시 운영자가 누구인지만 볼 수 있게 -->
+            <!-- TODO: 멤버가 아닐 시 팀 참가 버튼 표시 -->
+            <!-- TODO: 멤버일 경우 모두를 볼 수 있게 함 -->
+            <!-- TODO: 멤버일 경우 팀 전체의 TODO를 표시 -->
+            <!-- TODO: TODO의 긴급도에 따라 색 정하기 -->
+            <!-- TODO:  -->
+            {% for member in target_team.members.all %}
+                <span>{{member.nickname}}</span>
+            {% endfor %}
+                
+        </div>
+    </div>
+{% endblock content %}
+    

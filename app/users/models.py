@@ -1,37 +1,19 @@
 from django.urls import reverse
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .managers import CustomUserManager
 
 
-class Team(models.Model):
-    name = models.CharField(max_length=30, blank=False, null=False)
-    admin = models.ManyToManyField(
-        "users.User",
-        related_name="admin_team",
-    )
-
-    def __str__(self):
-        return self.name
-
-
-class User(AbstractUser):
+class User(AbstractBaseUser, PermissionsMixin):
     """유저 모델. 이메일을 유저네임 대신 사용"""
 
-    email = models.EmailField(max_length=255, unique=True)
-    name = models.CharField(max_length=255)
-    team = models.ForeignKey(
-        "Team", on_delete=models.SET_NULL, null=True, related_name="members"
-    )
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    email = models.EmailField("이메일", max_length=255, unique=True)
+    name = models.CharField("이름", max_length=255)
+    is_active = models.BooleanField("활성화 여부", default=True)
+    is_staff = models.BooleanField("스탭 여부", default=False)
     objects = CustomUserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = [
-        "name",
-    ]
 
     def __str__(self):
         return self.email
@@ -40,6 +22,8 @@ class User(AbstractUser):
         return reverse("users:detail", kwargs={"pk": self.pk})
 
     class Meta:
+        verbose_name = "유저"
+        verbose_name_plural = "유저들"
         ordering = [
-            "date_joined",
+            "pk",
         ]

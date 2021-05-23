@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import resolve_home
+from teams.views import TeamListView
 
 app_name = "core"
 
 urlpatterns = [
-    path("", resolve_home, name="home"),
+    path("", TeamListView.as_view(), name="home"),
 ]

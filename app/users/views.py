@@ -1,26 +1,10 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, DeleteView
-from .decorators import team_adminright_required
-from .models import Team
 
 User = get_user_model()
-has_ownership = [team_adminright_required, login_required]
-
-
-class TeamCreateView(CreateView, LoginRequiredMixin):
-    model = Team
-    template_name = "users/team_create.html"
-
-
-@method_decorator(has_ownership, "get")
-@method_decorator(has_ownership, "post")
-class TeamDeleteView(DeleteView):
-    model = Team
 
 
 class UserCreateView(CreateView):
@@ -37,9 +21,10 @@ class UserDetailView(DetailView):
 
     model = User
     context_object_name = "user_obj"
+    template_name = "users/detail.html"
 
 
-class UserLeaveView(DeleteView):
+class UserLeaveView(DeleteView, LoginRequiredMixin):
     model = User
     template_name = "users/leave.html"
     success_url = reverse_lazy("core:home")

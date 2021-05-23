@@ -1,0 +1,14 @@
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    {% if form.non_field_errors %}
+        {% for err in form.non_field_errors %}
+            <span>{{err}}</span>
+        {% endfor %}
+    {% endif %}
+    
+    {% for field in form %}
+        {% include 'mixins/input.html' with field=field %}
+    {% endfor %}
+    <button class="w-12 h-8 bg-pink-400">{{cta}}</button>            
+</form>

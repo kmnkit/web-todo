@@ -1,19 +1,36 @@
-<header>
-    <div>
+<header class="w-screen h-8 flex bg-purple-400 grid-cols-3">
+    <div class="w-full top-4 l-4">
+        <a href="{% url 'core:home' %}">
+            <span class="material-icons">home</span>
+        </a>
+    </div>
+    <div class="w-full text-center">
+        <h2>
+            Our To Do
+        </h2>
+    </div>
+    <div class="w-full flex justify-end">
         {% if user.is_authenticated %}
-            <a href="{% url 'users:detail' user_obj.pk %}">
-                <span class="material-icons-outlined">account_circle</span>
+        <div class="grid-cols-2 gap-40 right-4 top-4">
+            <a href="{% url 'teams:create' %}">
+                <span class="material-icons">group_add</span>
+            </a>
+            <a href="{% url 'users:detail' user.pk %}">
+                <span class="material-icons">account_circle</span>
             </a>
             <a href="{% url 'users:logout' %}">
-                <span class="material-icons-outlined">logout</span>
-            </a>
+                <span class="material-icons">logout</span>
+            </a>            
+        </div>
         {% else%}
+        <div class="grid-cols-2 gap-40 p-1">
             <a href="{% url 'users:signup' %}">
-                <span class="material-icons-outlined">person_add</span>
+                <span class="material-icons">person_add</span>
             </a>
             <a href="{% url 'users:login' %}">
-                <span class="material-icons-outlined">login</span>
+                <span class="material-icons">login</span>
             </a>
-        {% endif %}            
+        </div>
+        {% endif %}
     </div>
 </header>

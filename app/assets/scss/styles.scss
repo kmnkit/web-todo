@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+
+.page-header {
+    @apply no-underline text-lg w-full bg-red-400;
+}
+
+.responsible-list{
+    @apply grid gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 auto-rows-max;
+}
+@tailwind utilities;

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,14 +8,25 @@
     <!-- Google Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+      @font-face {
+        font-family: 'NanumBarunpenB';        
+        src: local('NanumBarunpenB'),
+        url("{% static 'fonts/NanumBarunpenB.ttf' %}") format("opentype");
+      }
+      @font-face {
+        font-family: 'NanumBarunpenR';        
+        src: local('NanumBarunpenR'),
+        url("{% static 'fonts/NanumBarunpenR.ttf' %}") format("opentype");
+      }
+    </style>
     <title>Web ToDo by Django</title>
 </head>
-<body>
+<body class="bg-green-100 w-full justify-center" style="font-family: 'NanumBarunpenR'">
     {% include 'partials/header.html' %}
-    <main>
-        {% block content %}            
-        {% endblock content %}            
-    </main>
+    {% block content %}
+    {% endblock content %}
     {% include 'partials/footer.html' %}
 </body>
 </html>

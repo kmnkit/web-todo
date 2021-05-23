@@ -1,4 +1,5 @@
 import os
+from django.urls import reverse_lazy
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -9,14 +10,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-boz2yxi7p5e2$z3znmwluxmq#@i8!o19q*=0g+3*ws@akd&i3x"
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-boz2yxi7p5e2$z3znmwluxmq#@i8!o19q*=0g+3*ws@akd&i3x",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = bool(os.environ.get("DJANGO_DEBUG", True))
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "0.0.0.0",
+    "*",
 ]
 
 
@@ -31,7 +35,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-PROJECT_APPS = ["core", "users"]
+PROJECT_APPS = ["core", "teams", "users"]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
 
@@ -122,8 +126,13 @@ MEDIA_URL = "/media/"
 
 MEDIA_ROOT = "/vol/web/media"
 STATIC_ROOT = "/vol/web/static"
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 AUTH_USER_MODEL = "users.User"
+LOGIN_REDIRECT_URL = reverse_lazy("core:home")
+LOGOUT_REDIRECT_URL = reverse_lazy("users:login")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
