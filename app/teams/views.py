@@ -32,11 +32,9 @@ class TeamCreateView(CreateView, LoginRequiredMixin):
         return redirect(reverse("teams:detail", args=(team.pk,)))
 
 
-class TeamDetailView(DetailView):
-    model = Team
-    context_object_name = "target_team"
-    template_name = "teams/detail.html"
-    success_url = reverse_lazy("core:home")
+def team_detail_view(request, pk=None):
+    team = Team.objects.filter(pk=pk).prefetch_related("members")[0]
+    return render(request, "teams/detail.html", {"target_team": team})
 
 
 @method_decorator(admin_rights, "get")

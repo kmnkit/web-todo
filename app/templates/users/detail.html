@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-    <span>{{user_obj.name}}</span>
+<div class="w-full bg-pink-200 flex justify-center">
+    <div class="text-center">        
+        {% if user_obj.login_method == 'email' %}
+            <img src={{user_obj.avatar.url}} alt="" class="avatar">
+        {% else %}
+            <img src={{user_obj.social_avatar_url}} alt="" class="w-40 h-40 rounded-full">
+        {% endif %}            
+        <span class="font-bold">{{user_obj.name}}</span>
+    </div>
+</div>
 {% endblock content %}
     

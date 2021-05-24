@@ -1,0 +1,10 @@
+<div class="w-40 h-60 bg-purple-300">    
+    {% if member.login_method == 'email' %}
+        {% if member.avatar != None %}
+            <img src={{member.avatar.url}} alt="" class="avatar">
+        {% endif %}            
+    {% else %}
+        <img src={{member.social_avatar_url}} alt="" class="w-40 h-40 rounded-full">
+    {% endif %}            
+    <span class="font-bold">{{member.nickname}}</span>
+</div>

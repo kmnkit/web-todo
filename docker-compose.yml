@@ -19,6 +19,8 @@ services:
       - DB_PORT=5432
       - DJANGO_DEBUG=True
       - DJANGO_SECRET_KEY=django-insecure-boz2yxi7p5e2$z3znmwluxmq#@i8!o19q*=0g+3*ws@akd&i3x
+      - GH_CLIENT_ID=0a59fb590e1721f2441c
+      - GH_CLIENT_SECRET=fd64af806dadfa1b3a639ba04fa478d490d213a7
     depends_on:
       - db
 

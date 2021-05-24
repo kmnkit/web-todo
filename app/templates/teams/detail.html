@@ -13,7 +13,7 @@
             <!-- TODO: TODO의 긴급도에 따라 색 정하기 -->
             <!-- TODO:  -->
             {% for member in target_team.members.all %}
-                <span>{{member.nickname}}</span>
+                {% include 'mixins/teams/member_card.html' with member=member %}
             {% endfor %}
                 
         </div>
