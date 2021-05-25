@@ -10,5 +10,7 @@
     {% for field in form %}
         {% include 'mixins/input.html' with field=field %}
     {% endfor %}
-    <button class="w-12 h-8 bg-pink-400">{{cta}}</button>            
+    <div class="grid place-items-center">
+        <button class="w-12 h-8 bg-pink-400">{{cta}}</button>            
+    </div>
 </form>

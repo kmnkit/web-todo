@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Team
+from .models import Team, TeamMember
 
 
 class CreateTeamForm(ModelForm):
@@ -10,3 +10,9 @@ class CreateTeamForm(ModelForm):
     def save(self, *args, **kwargs):
         team = super().save(commit=False)
         return team
+
+
+class MemberJoinForm(ModelForm):
+    class Meta:
+        model = TeamMember
+        fields = ("nickname",)

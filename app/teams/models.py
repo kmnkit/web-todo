@@ -6,7 +6,9 @@ class Team(models.Model):
     name = models.CharField("이름", max_length=30, blank=False, null=False)
     description = models.TextField("팀 설명", max_length=255)
     members = models.ManyToManyField(
-        "users.User", through="teams.TeamMember", verbose_name="팀 구성원"
+        "users.User",
+        through="teams.TeamMember",
+        verbose_name="팀 구성원",
     )
 
     class Meta:

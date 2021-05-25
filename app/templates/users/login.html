@@ -2,7 +2,11 @@
 
 
 {% block content %}
-    {% include 'users/social_login.html' %}
-    {% include 'mixins/form.html' with form=form cta='Log In' %}
+    <div class="w-full grid place-items-center">
+        <div class="w-96 grid place-items-center container rounded-2xl border border-solid border-green-600 mt-20 pb-14">
+            {% include 'users/social_login.html' %}
+            {% include 'mixins/form.html' with form=form cta='Log In' %}
+        </div>
+    </div>
 {% endblock content %}
     

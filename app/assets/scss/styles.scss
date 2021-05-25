@@ -8,4 +8,8 @@
 .responsible-list{
     @apply grid gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 auto-rows-max;
 }
+
+.avatar {
+    @apply w-36 h-36 rounded-full mt-4;
+}
 @tailwind utilities;

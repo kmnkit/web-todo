@@ -10,8 +10,8 @@ class CustomUserAdmin(UserAdmin):
     ordering = ("id",)
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        ("Personal Info", {"fields": ("name",)}),
-        ("Permissions", {"fields": ("is_staff", "is_superuser")}),
+        ("Personal Info", {"fields": ("name", "avatar", "social_avatar_url")}),
+        ("Permissions", {"fields": ("is_staff", "is_superuser", "login_method")}),
     )
     add_fieldsets = (
         (None, {"classes": ("wide",), "fields": ("email", "password1", "password2")}),
@@ -19,4 +19,4 @@ class CustomUserAdmin(UserAdmin):
 
     list_filter = UserAdmin.list_filter
 
-    list_display = ("email", "name")
+    list_display = ("name", "email")
