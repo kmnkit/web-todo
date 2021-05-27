@@ -4,12 +4,21 @@
 {% block content %}
     <div class='w-full h-full flex justify-center'>
         <div>
-            <span class="text-blue-600 text-2xl mt-10">{{target_team.name}} Team</span>
-            <p class="mb-5">{{target_team.description}}</p>
+            <div class="flex justify-between">
+                <div>
+                    <span class="text-blue-600 text-2xl mt-10">{{target_team.name}} Team</span>
+                    <p class="mb-5">{{target_team.description}}</p>
+                </div>
+                <div class="mr-5 mt-5">
+                    <a href="{% url 'teams:create-todo' target_team.pk %}">
+                        <i class="fas fa-plus-circle fa-2x"></i>
+                    </a>
+                </div>
+            </div>
             {% on_team target_team as am_i_member %}
             {% if am_i_member %}
             <div class="responsible-list">
-                {% for member in members %}
+                {% for member in object_list %}
                     {% include 'mixins/teams/member_card.html' with member=member %}
                 {% endfor %}
                 

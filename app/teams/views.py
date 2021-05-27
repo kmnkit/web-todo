@@ -4,7 +4,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse_lazy
 from django.shortcuts import render, reverse, redirect
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DeleteView, ListView
+from django.views.generic import CreateView, DeleteView, ListView, DetailView
+from django.views.generic.list import MultipleObjectMixin
 from .decorators import team_adminright_required
 from .forms import CreateTeamForm, MemberJoinForm
 from .models import Team, TeamMember
@@ -33,20 +34,18 @@ class TeamCreateView(CreateView, LoginRequiredMixin):
         return redirect(reverse("teams:detail", args=(team.pk,)))
 
 
-def team_detail_view(request, pk=None):
-    team = Team.objects.get(pk=pk)
-    member_list = team.team_members.all()
-    page = request.GET.get("page", 1)
-    paginator = Paginator(member_list, 10, orphans=5)
-    try:
-        members = paginator.page(page)
-    except PageNotAnInteger:
-        members = paginator.page(1)
-    except EmptyPage:
-        members = paginator.page(paginator.num_pages)
-    return render(
-        request, "teams/detail.html", {"target_team": team, "members": members}
-    )
+class TeamDetailView(DetailView, MultipleObjectMixin):
+    model = Team
+    paginate_by = 12
+    paginate_orphans = 6
+    template_name = "teams/detail.html"
+    context_object_name = "target_team"
+
+    def get_context_data(self, **kwargs):
+        object_list = TeamMember.objects.filter(team=self.get_object())
+        return super(TeamDetailView, self).get_context_data(
+            object_list=object_list, **kwargs
+        )
 
 
 @method_decorator(admin_rights, "get")
@@ -74,4 +73,4 @@ def join_as_member(request, pk=None):
                     team=team, user=user, nickname=nickname
                 )
                 return redirect(reverse("teams:detail", kwargs={"pk": pk}))
-        return redirect(reverse("teams:detail", kwargs={"pk": pk}))
+        return redirect(reverse("core:home"), kwargs={"error": "form is not valid"})

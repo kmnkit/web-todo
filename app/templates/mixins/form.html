@@ -1,16 +1,16 @@
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    
-    {% if form.non_field_errors %}
-        {% for err in form.non_field_errors %}
-            <span>{{err}}</span>
+<div class="mt-4 ml-4">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}    
+        {% if form.non_field_errors %}
+            {% for err in form.non_field_errors %}
+                <span>{{err}}</span>
+            {% endfor %}
+        {% endif %}    
+        {% for field in form %}
+            {% include 'mixins/input.html' with field=field %}
         {% endfor %}
-    {% endif %}
-    
-    {% for field in form %}
-        {% include 'mixins/input.html' with field=field %}
-    {% endfor %}
-    <div class="grid place-items-center">
-        <button class="w-12 h-8 bg-pink-400">{{cta}}</button>            
-    </div>
-</form>
+        <div class="grid place-items-center">
+            <button class="w-auto h-8 p-2 bg-pink-400">{{cta}}</button>            
+        </div>
+    </form>
+</div>

@@ -4,7 +4,9 @@
 <div class="w-full bg-pink-200 flex justify-center">
     <div class="text-center">        
         {% if user_obj.login_method == 'email' %}
-            <img src={{user_obj.avatar.url}} alt="" class="avatar">
+            {% if user_obj.avatar %}
+                <img src={{user_obj.avatar.url}} alt="" class="avatar">            
+            {% endif %}            
         {% else %}
             <img src={{user_obj.social_avatar_url}} alt="" class="w-40 h-40 rounded-full">
         {% endif %}            

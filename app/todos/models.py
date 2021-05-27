@@ -8,7 +8,10 @@ class ToDo(models.Model):
         "teams.Team", related_name="todos", on_delete=models.CASCADE
     )
     assigned_member = models.ForeignKey(
-        "users.User", related_name="todos", on_delete=models.SET_NULL, null=True
+        "users.User",
+        related_name="todos",
+        on_delete=models.SET_NULL,
+        null=True,
     )
     importance = models.IntegerField(
         "중요도", validators=[MinValueValidator(1.0), MaxValueValidator(5.0)]

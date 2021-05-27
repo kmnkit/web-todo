@@ -5,7 +5,7 @@ from .models import Team, TeamMember
 class CreateTeamForm(ModelForm):
     class Meta:
         model = Team
-        fields = "__all__"
+        exclude = "__all__"
 
     def save(self, *args, **kwargs):
         team = super().save(commit=False)

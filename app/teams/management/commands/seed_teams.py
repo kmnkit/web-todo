@@ -33,7 +33,7 @@ class Command(BaseCommand):
         teams = Team.objects.bulk_create(creating_list)
         member_creating_list = []
         for team in teams:
-            members = random.choices(users, k=10)
+            members = random.choices(users, k=20)
             for idx, member in enumerate(members):
                 is_admin = False
                 if idx == 0:

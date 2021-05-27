@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import TodoCreateView
+from .views import TodoDetailView
 
 app_name = "todos"
 
 
 urlpatterns = [
-    path("create/", TodoCreateView.as_view(), name="create"),
+    path("<int:pk>/", TodoDetailView.as_view(), name="detail"),
 ]

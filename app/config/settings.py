@@ -135,6 +135,8 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_USER_MODEL = "users.User"
+
+LOGIN_URL = reverse_lazy("users:login")
 LOGIN_REDIRECT_URL = reverse_lazy("core:home")
 LOGOUT_REDIRECT_URL = reverse_lazy("users:login")
 
